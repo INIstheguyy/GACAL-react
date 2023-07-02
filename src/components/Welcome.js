@@ -17,6 +17,7 @@ const Welcome = ({ imageUrl, text ,text2}) => {
             <h1 className="text-4xl md:text-[60px] font-bold text-white lg:leading-[70px] md:tracking-normalx text-center font-heading1 ">{text}</h1>
             <p className=" font-heading3 text-white text-center md:text-xl">{text2}</p>
         </div>
+        <div></div>
     </div>
   );
 };
