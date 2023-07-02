@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bellefair&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+  }
+  .hover-underline-animation::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    bottom: -2vh;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+   
+  }
+  .hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  @keyframes slide-in {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .imageContainer {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: -1;
+  }
+  
+  .imageContainerText{
+    position: absolute;
+    color: white;
+    top: 25px;
+  }
+  
+  
+  .container {
+    width: 100%;
+  }
+  
+  .text {
+    position: absolute;
+    top: 25px;
+    font-family: "san-serif";
+    font-size: 4vw;
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    margin-left: 50%;
+    transform: translateX(-200%);
+    opacity: 0;
+    animation: slide-in-anim 1.5s ease-out forwards;
+  }
+  .text2 {
+    position: absolute;
+    top: 2px;
+    font-family: "san-serif";
+    font-size: 4vw;
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    margin-left: 50%;
+    transform: translateX(-200%);
+    opacity: 0;
+    animation: slide-in-anim 1.5s ease-out forwards;
+  }
+  .text-h2 {
+    font-family: "Lexend Deca", sans-serif;
+    font-weight: bolder;
+  
+  }
+  .text-p {
+    font-weight: 500;
+    font-family: "Noto Sans Syloti Nagri", sans-serif;
+    text-align: start;
+    margin-left: -30%;
+    font-size: 3.5vw;
+    text-align: center;
+  }
+  
+  .carousel-wrapper{
+    margin-left: 25%;
+  }
+  .contactSec{
+    margin: 0 10vw;
+  }
+  .option1{
+    height: 20%;
+  }
+  .hamburger:focus{
+    outline: none;
+    border-color: blue;
+  }
+  
+  @keyframes slide-in-anim {
+    20% {
+      opacity: 0;
+    }
+    60% {
+      transform: translateX(-45%);
+    }
+    75% {
+      transform: translateX(-48%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+  }
