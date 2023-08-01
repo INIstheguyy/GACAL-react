@@ -5,7 +5,7 @@ import Welcome from "../components/Welcome";
 const Project = () => {
     return ( 
         <section>
-            <div className="container">
+            <div className="">
                 <div className="">
                     <Welcome
                     imageUrl={Hero.image}
@@ -31,7 +31,14 @@ const Project = () => {
                     <div className="py-5">
                     <h5 class=" py-2 font-bold text-gray-700 italic font-heading2 text-2xl leading-9 tracking-widest">You're welcome to send your donations:</h5>
                         <div className="">
-                            <button className="bg-blue-700 text-white py-2 px-5 shadow-xl rounded-lg  mr-16 transition ease-in-out delay-150   hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 outline-none text-center"> <Link to='/donate'>DONATE</Link></button>
+                        <Link  to="/donate">
+                        <button
+                        className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-mdtransition-shadow transform hover:translate-y-1 hover:shadow-lg focus:outline-none focus:ring focus:ring-blue-300 active:translate-y-2"
+                        style={{ borderColor: '#4a90e2' }}
+                      >
+                        Donate
+                      </button>
+                      </Link>
                         </div>
                     </div>
                 </div>

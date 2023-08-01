@@ -9,26 +9,9 @@ const Donate = () => {
 
   const copyToClipboard = () => {
     const address = document.getElementById('disabled-input').value;
-
-    // For mobile devices
-    if (navigator.userAgent.match(/ipad|iphone|ipod|android/i)) {
-      const el = document.createElement('textarea');
-      el.value = address;
-      el.setAttribute('readonly', '');
-      el.style.position = 'absolute';
-      el.style.left = '-9999px';
-      document.body.appendChild(el);
-      el.select();
-      const range = document.createRange();
-      range.selectNodeContents(el);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      el.setSelectionRange(0, 999999);
-      document.execCommand('copy');
-      document.body.removeChild(el);
-    } else {
-      // For desktop devices
+  
+    if (navigator.clipboard) {
+      // For modern browsers that support Clipboard API
       navigator.clipboard
         .writeText(address)
         .then(() => {
@@ -36,13 +19,40 @@ const Donate = () => {
           setTimeout(() => setCopied(false), 5000);
         })
         .catch((error) => {
-          console.error('Failed to copy to clipboard:', error);
+          console.error('Failed to copy to clipboard using Clipboard API:', error);
+          fallbackCopyToClipboard(address);
         });
+    } else {
+      // Fallback for iOS and other devices
+      fallbackCopyToClipboard(address);
     }
   };
+  
+  const fallbackCopyToClipboard = (address) => {
+    const el = document.createElement('textarea');
+    el.value = address;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    el.setSelectionRange(0, 999999);
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  
+  
     return ( 
         <section>
-            <div className="container">
+            <div className="">
               <div>
                   <Welcome
                       imageUrl={Hero.image}
@@ -94,7 +104,7 @@ const Donate = () => {
                     {copied && <p className="popUp p-5 italic font-semibold font-paragraph!">Copied to clipboard</p>}
                   </div>
                   <div className="flex justify-center pb-8">
-                    <img className="w-48" src="/src/images/QR-code.jpg" alt="" />
+                    <img className="w-48" src="/images/QR-code.jpg" alt="" />
                   </div>
                 </div>
                 <div className="px-3 shadow-lg m-5 rounded-lg">
@@ -116,7 +126,8 @@ const Donate = () => {
                           <input
                             type="text"
                             id="name"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 "
+                            placeholder="Jenna Grey"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                             required
                           />
                         </div>
@@ -127,12 +138,13 @@ const Donate = () => {
                           <input
                             type="email"
                             id="email"
+                            placeholder="jennagrey24@gmail.com"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             required
                           />
                         </div>
                         <div className="mb-6">
-                          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="front_input">
+                          <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="front_input">
                             Upload front of card
                           </label>
                           <input
@@ -155,7 +167,7 @@ const Donate = () => {
                         </div>
                         <button
                           type="submit"
-                          className="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          className="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                         >
                           Submit
                         </button>

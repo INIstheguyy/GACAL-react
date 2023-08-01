@@ -136,3 +136,47 @@
       transform: translateX(-50%);
     }
   }
+
+  .welcome-component {
+    /* Set the background image to cover the full container and maintain aspect ratio */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Set the height to 100vh to cover the full screen vertically */
+    height: 100vh;
+  }
+  
+  /* If you want the content to be centered both horizontally and vertically */
+  .welcome-component .flex {
+    /* Center the content horizontally */
+    justify-content: center;
+    /* Center the content vertically */
+    align-items: center;
+  }
+
+  @layer components {
+    .3d-button {
+      background-color: #4a90e2; /* Blue background color */
+      color: #ffffff; /* White text color */
+      padding: 0.75rem 1.5rem;
+      border: 2px solid #4a90e2; /* Match the background color for the border */
+      border-radius: 8px;
+      box-shadow: 0 6px 0 #2969b1; /* This creates the 3D effect with a darker shadow on the bottom */
+      transition: transform 0.2s, box-shadow 0.2s; /* Adding a smooth transition when the button is pressed */
+    }
+  
+    .3d-button:hover {
+      transform: translateY(2px); /* Lift the button slightly on hover */
+      box-shadow: 0 4px 0 #2969b1; /* Darker shadow on hover to enhance the 3D effect */
+    }
+  
+    .3d-button:focus {
+      outline: none; /* Remove default focus outline */
+      box-shadow: 0 4px 0 #2969b1; /* Darker shadow when the button is focused */
+    }
+  
+    .3d-button:active {
+      transform: translateY(6px); /* Pressing the button pushes it further down */
+      box-shadow: none; /* Remove shadow when the button is pressed */
+    }
+  }

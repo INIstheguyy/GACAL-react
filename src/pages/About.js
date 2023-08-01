@@ -8,7 +8,7 @@ import Welcome from "../components/Welcome";
 const About = () => {
     return ( 
         <section>
-            <div className="container">
+            <div className="">
                 <div>
                     <Welcome
                         imageUrl={Hero.images}

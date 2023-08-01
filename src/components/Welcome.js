@@ -10,7 +10,7 @@ const Welcome = ({ imageUrl, text ,text2}) => {
 
   return (
     <div
-      className="welcome-component bg-cover bg-center flex p-4 items-center justify-center w-[98.7vw] h-screen"
+      className=" bg-cover bg-center flex  items-center justify-center w-[98.7vw] h-screen"
       style={styles}
     >
         <div className=" flex flex-col md:p-10 md:max-w-[60vw] ">

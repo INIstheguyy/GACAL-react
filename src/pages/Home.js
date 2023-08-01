@@ -7,7 +7,7 @@ import Example from "../components/Testimonials";
 const Home = () => {
     return ( 
         <section>
-            <div className=" container">
+            <div className=" ">
                 <div>
                     <Welcome
                         imageUrl={Hero.images}

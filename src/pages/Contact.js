@@ -5,7 +5,7 @@ import Welcome from "../components/Welcome";
 const Contact = () => {
     return ( 
         <section>
-            <div className="container">
+            <div className="">
                 <div className="">
                     <Welcome
                     imageUrl={Hero.image}

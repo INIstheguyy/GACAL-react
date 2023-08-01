@@ -59,8 +59,13 @@ const Navbar = () => {
                     </Link>
                   </p>
                   <p className="my-5 font-normal text-base leading-tight tracking-wider">
-                    <Link to="/donate" onClick={handleLinkClick}>
-                      DONATE
+                    <Link  to="/donate" onClick={handleLinkClick}>
+                      <button
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-mdtransition-shadow transform hover:translate-y-1 hover:shadow-lg focus:outline-none focus:ring focus:ring-blue-300 active:translate-y-2"
+                      style={{ borderColor: '#4a90e2' }}
+                    >
+                      Donate
+                    </button>
                     </Link>
                   </p>
                 </div>
