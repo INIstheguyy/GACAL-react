@@ -5,7 +5,7 @@ export const Hero = {
         h5:`Your donation can go a long way to save a life today!`
     },
 
-    images:'/images/get_involved.jpeg',
+    images:'/images/home-mobile.jpeg',
     images2:'/images/images2.jpeg',
     para1:'WHY WE’RE HERE',
     para2:'  Over 400,000 children each year are not able to live with their families as the result of the trauma of abuse, neglect and abandonment. The needs of these children are greater than public funding are able to provide.The GET A CHILD A LIFE Foundation of America identifies and accesses resources to support foster care, adoption, residential treatment, mental health and community-based programs of the highest quality, so that children in need or who have been the victims of trauma, abuse, neglect or abandonment may lead healthy, productive lives.',
