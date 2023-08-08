@@ -3,6 +3,7 @@ import { Hero, Donates } from "../const/Donate";
 import { AiOutlineCopy } from 'react-icons/ai';
 import { useState } from "react";
 import Welcome from "../components/Welcome";
+import btcImage from "../assets/images/new-btc.jpg"
 
 const Donate = () => {
   const [copied, setCopied] = useState(false);
@@ -91,7 +92,7 @@ const Donate = () => {
                       id="disabled-input"
                       aria-label="disabled input"
                       className="copyAddress mb-6 bg-gray-50 border border-gray-300 border-double text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-9/12 md:w-10/12 p-2.5 cursor-not-allowed"
-                      value="1DmUBDX3SYNVVceBasUoH9eKxqgAHbdkNw"
+                      value="bc1qfs8x8v33arcg324j00v2ujddznumrhfm3c2p43"
                       disabled
                     />
                     <button
@@ -104,7 +105,7 @@ const Donate = () => {
                     {copied && <p className="popUp p-5 italic font-semibold font-paragraph!">Copied to clipboard</p>}
                   </div>
                   <div className="flex justify-center pb-8">
-                    <img className="w-48" src="/images/QR-code.jpg" alt="" />
+                    <img className="w-48" src={btcImage} alt="" />
                   </div>
                 </div>
                 <div className="px-3 shadow-lg m-5 rounded-lg">
