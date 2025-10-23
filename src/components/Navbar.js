@@ -1,14 +1,22 @@
-
-
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import menu from "../assets/images/menu.svg";
-import close from "../assets/images/close.svg";
-import icon from "../assets/images/GACAL logo4.png .png";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
+import logo from "../assets/images/GACAL logo4.png .png";
 import "../index.css";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleMenuToggle = () => {
     setToggle((prevToggle) => !prevToggle);
@@ -18,89 +26,116 @@ const Navbar = () => {
     setToggle(false);
   };
 
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/project", label: "Projects" },
+    { path: "/contact", label: "Contact" },
+  ];
+
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <nav className="bg-white shadow-md py-4 px-2">
-      <div className="container flex justify-between items-center">
-        <img src={icon} alt="" className="w-[17%] md:w-[10%] " />
-        <div className="md:hidden flex flex-1 justify-end items-center">
-          <img
-            onClick={handleMenuToggle}
-            src={toggle ? close : menu}
-            alt="menu"
-            className="outline-none cursor-pointer object-contain w-[30px] h-[30px]"
-          />
-          <div
-            className={`${
-              toggle ? "flex" : "hidden"
-            } p-6 bg-black-gradient absolute top-10 right-0 mx-2 my-4 rounded-xl min-w-[140px]`}
-          >
-            <div className="relative h-full w-full p-5">
-              <div className="absolute w-[125%] inset-0 bg-[white] backdrop-filter backdrop-blur-lg"></div>
-              <div className="relative h-full">
-                <div className="flex flex-col justify-end items-start h-full text-black text-left z-50">
-                  <p className="my-5 font-normal text-base leading-tight tracking-wider">
-                    <Link to="/" onClick={handleLinkClick}>
-                      HOME
-                    </Link>
-                  </p>
-                  <p className="my-5 font-normal text-base leading-tight tracking-wider">
-                    <Link to="/about" onClick={handleLinkClick}>
-                      ABOUT
-                    </Link>
-                  </p>
-                  <p className="my-5 font-normal text-base leading-tight tracking-wider">
-                    <Link to="/project" onClick={handleLinkClick}>
-                      PROJECTS
-                    </Link>
-                  </p>
-                  <p className="my-5 font-normal text-base leading-tight tracking-wider">
-                    <Link to="/contact" onClick={handleLinkClick}>
-                      CONTACT
-                    </Link>
-                  </p>
-                  <p className="my-5 font-normal text-base leading-tight tracking-wider">
-                    <Link  to="/donate" onClick={handleLinkClick}>
-                      <button
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-mdtransition-shadow transform hover:translate-y-1 hover:shadow-lg focus:outline-none focus:ring focus:ring-blue-300 active:translate-y-2"
-                      style={{ borderColor: '#4a90e2' }}
-                    >
-                      Donate
-                    </button>
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300 ${
+        scrolled ? "shadow-lg py-3" : "py-4"
+      }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="flex items-center group">
+            <img
+              src={logo}
+              alt="GACAL Logo"
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={handleLinkClick}
+                className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-all duration-300 ${
+                  isActive(link.path)
+                    ? "text-blue-600"
+                    : "text-gray-700 hover:text-blue-600"
+                }`}
+              >
+                {link.label}
+                {isActive(link.path) && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"></span>
+                )}
+              </Link>
+            ))}
+            <Link
+              to="/donate"
+              onClick={handleLinkClick}
+              className="ml-4 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 hover:from-blue-700 hover:to-blue-800"
+            >
+              Donate Now
+            </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={handleMenuToggle}
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            aria-label="Toggle menu"
+          >
+            {toggle ? (
+              <IoClose size={28} className="text-gray-700" />
+            ) : (
+              <HiMenuAlt3 size={28} className="text-gray-700" />
+            )}
+          </button>
         </div>
-        <div className="md:flex hidden items-center">
-          <div className="list-container pr-[8vw] pl-[7vw] pt-[29px] pb-[28px] md:pl-[1vw] md:pr-[1vw]">
-            <div className="list-none sm:list-none sm:flex justify-end items-center flex-1 flex-wrap">
-              <p className="hover-underline-animation text-black mr-10 h-[19px] text-base font-normal tracking-widest leading-tight font-heading2">
-                <Link to="/" onClick={handleLinkClick}>
-                  HOME
-                </Link>
-              </p>
-              <p className="hover-underline-animation text-black mr-10 h-[19px] text-base font-normal tracking-widest leading-tight font-heading2">
-                <Link to="/about" onClick={handleLinkClick}>
-                  ABOUT
-                </Link>
-              </p>
-              <p className="hover-underline-animation text-black mr-10 h-[19px] text-base font-normal tracking-widest leading-tight font-heading2">
-                <Link to="/project" onClick={handleLinkClick}>
-                  PROJECTS
-                </Link>
-              </p>
-              <p className="hover-underline-animation text-black mr-16 h-[19px] text-base font-extralight tracking-widest leading-tight font-heading2">
-                <Link to="/contact" onClick={handleLinkClick}>
-                  CONTACT
-                </Link>
-              </p>
-              <p className="bg-blue-700 text-white py-2 px-5 shadow-xl rounded-lg mr-16 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 outline-none">
-                <Link to="/donate" onClick={handleLinkClick}>
-                  DONATE
-                </Link>
-              </p>
+
+        {/* Mobile Navigation */}
+        <div
+          className={`lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+            toggle ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+          onClick={handleMenuToggle}
+          style={{ top: scrolled ? '64px' : '80px' }}
+        >
+          <div
+            className={`absolute right-0 top-0 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
+              toggle ? "translate-x-0" : "translate-x-full"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col h-full p-6">
+              <div className="flex-1 space-y-1">
+                {navLinks.map((link, index) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={handleLinkClick}
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
+                      isActive(link.path)
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-gray-700 hover:bg-gray-50"
+                    }`}
+                    style={{
+                      animationDelay: `${index * 50}ms`,
+                      animation: toggle ? "slideInRight 0.3s ease-out" : "none",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                to="/donate"
+                onClick={handleLinkClick}
+                className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
+              >
+                Donate Now
+              </Link>
             </div>
           </div>
         </div>

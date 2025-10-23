@@ -11,10 +11,10 @@ module.exports = {
         'color3': "#2DAAA1"
       },
       fontFamily:{
-        'heading1': 'Bellefair',
-        'heading2': 'Barlow Condensed',
-        'heading3': 'poppins'  
-  
+        'heading1': ['Playfair Display', 'serif'],
+        'heading2': ['Space Grotesk', 'sans-serif'],
+        'heading3': ['Inter', 'sans-serif'],
+        'body': ['Plus Jakarta Sans', 'sans-serif']
       },
       screens:{
         sm:'580px',

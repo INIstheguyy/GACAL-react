@@ -12,8 +12,9 @@ import Project from './pages/Project';
 function App() {
   return (
     <Router>
-      <div className=''>
+      <div className='min-h-screen flex flex-col'>
         <Navbar/>
+        <main className='flex-1 pt-16 md:pt-20'>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/about" element={<About/>}/>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/project" element={<Project/>}/>
           <Route path="/donate" element={<Donate/>}/>
         </Routes>
+        </main>
         <Footer/>
       </div>
     </Router>

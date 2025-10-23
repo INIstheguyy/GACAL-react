@@ -13,54 +13,54 @@ function ContactForm() {
     };
   
     return (
-      <form className="py-5" onSubmit={handleSubmit}>
-        <div className="mb-6">
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name" className="block mb-2 text-sm font-semibold text-gray-700 font-body">
             Name
           </label>
           <input
             type="text"
             id="name"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 border-2 border-blue-100 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-3 font-body transition-all duration-200"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
-        <div className="mb-6">
-          <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <div>
+          <label htmlFor="company" className="block mb-2 text-sm font-semibold text-gray-700 font-body">
             Company
           </label>
           <input
             type="text"
             id="company"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 border-2 border-blue-100 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-3 font-body transition-all duration-200"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
             required
           />
         </div>
-        <div className="mb-6">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <div>
+          <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-700 font-body">
             Your email
           </label>
           <input
             type="email"
             id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
+            className="bg-gray-50 border-2 border-blue-100 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-3 font-body transition-all duration-200"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className="mb-6">
-          <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <div>
+          <label htmlFor="message" className="block mb-2 text-sm font-semibold text-gray-700 font-body">
             Your message
           </label>
           <textarea
             id="message"
             rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+            className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-blue-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-body transition-all duration-200"
             placeholder="Leave a comment..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -68,9 +68,9 @@ function ContactForm() {
         </div>
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+          className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
-          Submit
+          Send Message
         </button>
       </form>
     );
