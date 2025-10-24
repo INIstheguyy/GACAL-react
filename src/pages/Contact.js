@@ -53,7 +53,7 @@ const Contact = () => {
                           Email
                         </h4>
                         <p className="text-lg font-semibold text-gray-900 font-heading2">
-                          info@gacal.org
+                          info@getachildalife.org
                         </p>
                       </div>
                     </div>

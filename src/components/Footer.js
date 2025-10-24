@@ -44,7 +44,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center text-gray-300 hover:text-white transition-colors duration-200">
                 <HiMail className="mr-3 text-blue-400" size={20} />
-                <span className="text-sm">info@gacal.org</span>
+                <span className="text-sm">info@getachildalife.org</span>
               </div>
               <div className="flex items-center text-gray-300 hover:text-white transition-colors duration-200">
                 <HiPhone className="mr-3 text-blue-400" size={20} />

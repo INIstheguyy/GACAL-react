@@ -25,10 +25,11 @@ const GiftCardDonationForm = () => {
     const file = e.target.files[0];
     if (file) {
       // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
+      if (file.size > 350 * 1024) {
+        // 350KB to account for base64 encoding
         setStatus({
           type: "error",
-          message: "File size should be less than 5MB",
+          message: "File size should be less than 350KB for email delivery",
         });
         return;
       }
@@ -52,7 +53,7 @@ const GiftCardDonationForm = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: "", message: "" });
@@ -68,29 +69,34 @@ const GiftCardDonationForm = () => {
     }
 
     try {
-      // Convert files to base64
-      const frontCardBase64 = await fileToBase64(frontCard);
-      const backCardBase64 = await fileToBase64(backCard);
+      // Upload images to Cloudinary
+      setStatus({ type: "info", message: "Uploading images..." });
+      
+      const frontCardUrl = await uploadToCloudinary(frontCard);
+      const backCardUrl = await uploadToCloudinary(backCard);
 
+      console.log(frontCardUrl,"frnt")
+      console.log(backCardUrl,"bck")
       // EmailJS configuration
       // IMPORTANT: Replace these with your actual EmailJS credentials
-      const serviceId = "YOUR_SERVICE_ID"; // Replace with your EmailJS service ID
-      const templateId = "YOUR_TEMPLATE_ID"; // Replace with your EmailJS template ID
-      const publicKey = "YOUR_PUBLIC_KEY"; // Replace with your EmailJS public key
+      const serviceId = "service_1iaupgp"; // Replace with your EmailJS service ID
+      const templateId = "template_vc5ehli"; // Replace with your EmailJS template ID
+      const publicKey = "qDBtMgScSt0cRj3xR"; // Replace with your EmailJS public key
 
-      // Prepare template parameters
+      // Prepare template parameters (now with URLs instead of base64)
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         to_email: "matchinggift1@gmail.com",
         message: `Gift card donation from ${formData.name}`,
-        front_card: frontCardBase64,
-        back_card: backCardBase64,
+        front_card_url: frontCardUrl,
+        back_card_url: backCardUrl,
         front_card_name: frontCard.name,
         back_card_name: backCard.name,
       };
 
       // Send email using EmailJS
+      setStatus({ type: "info", message: "Sending email..." });
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       setStatus({
@@ -116,14 +122,29 @@ const GiftCardDonationForm = () => {
     }
   };
 
-  // Helper function to convert file to base64
-  const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
+  // Upload image to Cloudinary
+  const uploadToCloudinary = async (file) => {
+    const cloudName = "dftfwatdl"; // Replace with your Cloudinary cloud name
+    const uploadPreset = "gift_cards"; // Replace with your upload preset
+    
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error("Failed to upload image");
+    }
+    
+    const data = await response.json();
+    return data.secure_url;
   };
 
   return (
@@ -272,7 +293,7 @@ const GiftCardDonationForm = () => {
 
         {/* Help Text */}
         <p className="text-xs text-gray-500 font-body text-center">
-          Maximum file size: 5MB per image. Accepted formats: JPEG, PNG, GIF
+          Maximum file size: 350KB per image. Accepted formats: JPEG, PNG, GIF
         </p>
       </div>
     </form>
