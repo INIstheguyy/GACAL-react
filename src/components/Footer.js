@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaPinterestP,
+} from "react-icons/fa";
 import { HiMail, HiPhone, HiLocationMarker } from "react-icons/hi";
 import logo from "../assets/images/GACAL logo4.png .png";
 import "../index.css";
@@ -48,11 +53,16 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-gray-300 hover:text-white transition-colors duration-200">
                 <HiPhone className="mr-3 text-blue-400" size={20} />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <span className="text-sm">+1 (925) 302-6486</span>
               </div>
               <div className="flex items-start text-gray-300 hover:text-white transition-colors duration-200">
-                <HiLocationMarker className="mr-3 text-blue-400 mt-1" size={20} />
-                <span className="text-sm">123 Hope Street, Community City</span>
+                <HiLocationMarker
+                  className="mr-3 text-blue-400 mt-1"
+                  size={20}
+                />
+                <span className="text-sm" >
+                  4169 RAVENWOOD PL CASTRO VALLEY, CA 94546
+                </span>
               </div>
             </div>
           </div>

@@ -291,9 +291,9 @@ const GiftCardDonationForm = () => {
           )}
         </button>
 
-        Help Text
+      
         <p className="text-xs text-gray-500 font-body text-center">
-          Maximum file size: 350KB per image. Accepted formats: JPEG, PNG, GIF
+          Maximum file size: 5MB per image. Accepted formats: JPEG, PNG, GIF
         </p>
       </div>
     </form>
